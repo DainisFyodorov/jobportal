@@ -11,7 +11,7 @@ import java.util.Date;
 public class Users {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int userId;
 
     @Column(unique = true)
@@ -23,7 +23,7 @@ public class Users {
     private boolean isActive;
 
     @DateTimeFormat(pattern = "dd-MM-yyyy")
-    private Date registractionDate;
+    private Date registrationDate;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "userTypeId", referencedColumnName = "userTypeId")
@@ -32,12 +32,12 @@ public class Users {
     public Users() {
     }
 
-    public Users(int userId, String email, String password, boolean isActive, Date registractionDate, UsersType userTypeId) {
+    public Users(int userId, String email, String password, boolean isActive, Date registrationDate, UsersType userTypeId) {
         this.userId = userId;
         this.email = email;
         this.password = password;
         this.isActive = isActive;
-        this.registractionDate = registractionDate;
+        this.registrationDate = registrationDate;
         this.userTypeId = userTypeId;
     }
 
@@ -73,12 +73,12 @@ public class Users {
         isActive = active;
     }
 
-    public Date getRegistractionDate() {
-        return registractionDate;
+    public Date getRegistrationDate() {
+        return registrationDate;
     }
 
-    public void setRegistractionDate(Date registractionDate) {
-        this.registractionDate = registractionDate;
+    public void setRegistrationDate(Date registrationDate) {
+        this.registrationDate = registrationDate;
     }
 
     public UsersType getUserTypeId() {
@@ -96,7 +96,7 @@ public class Users {
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", isActive=" + isActive +
-                ", registractionDate=" + registractionDate +
+                ", registractionDate=" + registrationDate +
                 ", userTypeId=" + userTypeId +
                 '}';
     }
