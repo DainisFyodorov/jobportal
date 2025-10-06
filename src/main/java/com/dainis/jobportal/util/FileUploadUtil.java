@@ -11,23 +11,25 @@ import java.nio.file.StandardCopyOption;
 
 public class FileUploadUtil {
 
-    public static void saveFile(String uploadDir, String filename, MultipartFile multipartFile) throws IOException {
+    public static void saveFile(String uploadDir, String fileName, MultipartFile multipartFile) throws IOException {
 
-        Path uploadPath = Paths.get(uploadDir);
-        if(!Files.exists(uploadPath)) {
-            Files.createDirectories(uploadPath);
+        if (fileName == null || fileName.isEmpty()) {
+            throw new IOException("Filename is empty");
         }
 
+        Path filePath = Paths.get(uploadDir).resolve(fileName);
 
+        Path parentDir = filePath.getParent();
+        if (Files.exists(parentDir) && !Files.isDirectory(parentDir)) {
+            throw new IOException("Parent path exists and is not a directory: " + parentDir);
+        }
+        Files.createDirectories(parentDir);
 
-        try(InputStream inputStream = multipartFile.getInputStream()) {
-            Path path = uploadPath.resolve(filename);
-            System.out.println("FilePath " + path);
-            System.out.println("fileName " + filename);
-
-            Files.copy(inputStream, path, StandardCopyOption.REPLACE_EXISTING);
-        } catch(IOException ioe) {
-            throw new IOException("Could not save image file: " + filename, ioe);
+        try (InputStream inputStream = multipartFile.getInputStream()) {
+            Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
+            System.out.println("File saved to: " + filePath.toAbsolutePath());
+        } catch (IOException e) {
+            throw new IOException("Could not save file: " + fileName, e);
         }
     }
 }

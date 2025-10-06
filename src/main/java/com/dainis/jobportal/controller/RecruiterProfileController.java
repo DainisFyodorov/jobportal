@@ -74,7 +74,7 @@ public class RecruiterProfileController {
 
         String fileName = "";
         if(!multipartFile.getOriginalFilename().equals("")) {
-            fileName = StringUtils.cleanPath(Objects.requireNonNull(multipartFile.getOriginalFilename()));
+            fileName = StringUtils.getFilename(multipartFile.getOriginalFilename());
             recruiterProfile.setProfilePhoto(fileName);
         }
 
