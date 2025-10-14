@@ -19,10 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Controller
 public class JobPostActivityController {
@@ -112,6 +109,7 @@ public class JobPostActivityController {
 
         Object currentUserProfile = usersService.getCurrentUserProfile();
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        List<JobPostActivity> jobPostActivitiesList = new ArrayList<>();
 
         if(!(authentication instanceof AnonymousAuthenticationToken)) {
             String currentUsername = authentication.getName();
@@ -126,6 +124,8 @@ public class JobPostActivityController {
                         jobSeekerApplyService.getCandidatesJobs((JobSeekerProfile) currentUserProfile);
                 List<JobSeekerSave> jobSeekerSaveList =
                         jobSeekerSaveService.getCandidatesJob((JobSeekerProfile) currentUserProfile);
+
+
 
                 boolean exist;
                 boolean saved;
@@ -158,11 +158,12 @@ public class JobPostActivityController {
                         jobActivity.setIsSaved(false);
                     }
 
-                    model.addAttribute("jobPost", jobActivity);
+                    jobPostActivitiesList.add(jobActivity);
                 }
             }
         }
 
+        model.addAttribute("jobPost", jobPostActivitiesList);
         model.addAttribute("user", currentUserProfile);
 
         return "dashboard";
