@@ -20,10 +20,14 @@ public class JobSeekerApplyService {
     }
 
     public List<JobSeekerApply> getCandidatesJobs(JobSeekerProfile userAccountId) {
-        return jobSeekerApplyRepository.findByJobSeekerProfile(userAccountId);
+        return jobSeekerApplyRepository.findByUserId(userAccountId);
     }
 
     public List<JobSeekerApply> getJobCandidates(JobPostActivity job) {
         return jobSeekerApplyRepository.findByJob(job);
+    }
+
+    public void addNew(JobSeekerApply jobSeekerApply) {
+        jobSeekerApplyRepository.save(jobSeekerApply);
     }
 }

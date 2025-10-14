@@ -23,7 +23,7 @@ public class JobSeekerSaveService {
         return jobSeekerSaveRepository.findByUserId(userAccountId);
     }
 
-    public List<JobSeekerSave> getCandidates(JobPostActivity job) {
+    public List<JobSeekerSave> getJobCandidates(JobPostActivity job) {
         return jobSeekerSaveRepository.findByJob(job);
     }
 }
