@@ -1,17 +1,17 @@
 package com.dainis.jobportal.repository;
 
 import com.dainis.jobportal.entity.JobPostActivity;
-import com.dainis.jobportal.entity.JobSeekerApply;
 import com.dainis.jobportal.entity.JobSeekerProfile;
+import com.dainis.jobportal.entity.JobSeekerSave;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public interface JobSeekerApplyRepository extends JpaRepository<JobSeekerApply, Integer> {
+public interface JobSeekerSaveRepository extends JpaRepository<JobSeekerSave, Integer> {
 
-    List<JobSeekerApply> findByJobSeekerProfile(JobSeekerProfile userId);
+    List<JobSeekerSave> findByUserId(JobSeekerProfile userAccountId);
 
-    List<JobSeekerApply> findByJob(JobPostActivity job);
+    List<JobSeekerSave> findByJob(JobPostActivity job);
 }
