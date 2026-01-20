@@ -1,2 +1,6 @@
 /mvnw text eol=lf
 *.cmd text eol=crlf
+
+# To ignore third-party js libraries and plugins
+src/main/resources/static/js/vendor/** linguist-vendored
+src/main/resources/static/js/summernote/** linguist-vendored
