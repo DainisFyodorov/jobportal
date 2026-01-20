@@ -3,4 +3,4 @@
 
 # To ignore third-party js libraries and plugins
 src/main/resources/static/js/vendor/** linguist-vendored
-src/main/resources/static/js/summernote/** linguist-vendored
+src/main/resources/static/summernote/** linguist-vendored
